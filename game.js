@@ -7,11 +7,11 @@ class FlappyBird {
 
     // Mobile detection and speed settings
     this.isMobile = this.detectMobile();
-    this.mobileSpeedMultiplier = 0.6; // Reduce speed by 40% on mobile
+    this.mobileSpeedMultiplier = 0.4; // Reduce speed by 60% on mobile (era 0.6)
 
     if (this.isMobile) {
       console.log(
-        "📱 Mobile mode detected - Game speed reduced for better mobile experience"
+        "📱 Mobile mode detected - Game speed reduced by 60% for better mobile experience"
       );
     }
 
@@ -43,8 +43,8 @@ class FlappyBird {
       width: 30,
       height: 30,
       velocity: 0,
-      gravity: this.isMobile ? 0.4 : 0.5, // Reduced gravity on mobile
-      jumpPower: this.isMobile ? -7 : -8, // Reduced jump power on mobile
+      gravity: this.isMobile ? 0.3 : 0.5, // Further reduced gravity on mobile
+      jumpPower: this.isMobile ? -6 : -8, // Further reduced jump power on mobile
       rotation: 0,
       velocityX: 0, // Added for horizontal movement
     };
@@ -210,7 +210,7 @@ class FlappyBird {
   jump() {
     if (this.isVerticalMode) {
       // In modalità spaziale, il salto muove la navicella a destra
-      this.bird.velocityX = this.isMobile ? 6 : 8; // Reduced horizontal speed on mobile
+      this.bird.velocityX = this.isMobile ? 4 : 8; // Further reduced horizontal speed on mobile
     } else {
       // Modalità normale
       this.bird.velocity = this.bird.jumpPower;
@@ -223,7 +223,7 @@ class FlappyBird {
 
     if (this.isVerticalMode) {
       // Modalità spaziale: movimento orizzontale come nella modalità normale ma ruotato
-      this.bird.velocityX -= this.isMobile ? 0.4 : 0.5; // Reduced horizontal gravity on mobile
+      this.bird.velocityX -= this.isMobile ? 0.3 : 0.5; // Further reduced horizontal gravity on mobile
       this.bird.x += this.bird.velocityX;
       this.bird.rotation = this.bird.velocityX > 0 ? -20 : 20; // Rotazione basata sulla velocità
 
