@@ -5,6 +5,16 @@ class FlappyBird {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
 
+    // Mobile detection and speed settings
+    this.isMobile = this.detectMobile();
+    this.mobileSpeedMultiplier = 0.6; // Reduce speed by 40% on mobile
+
+    if (this.isMobile) {
+      console.log(
+        "📱 Mobile mode detected - Game speed reduced for better mobile experience"
+      );
+    }
+
     // Game state
     this.gameState = "start"; // 'start', 'playing', 'gameOver'
     this.score = 0;
@@ -33,8 +43,8 @@ class FlappyBird {
       width: 30,
       height: 30,
       velocity: 0,
-      gravity: 0.5,
-      jumpPower: -8,
+      gravity: this.isMobile ? 0.4 : 0.5, // Reduced gravity on mobile
+      jumpPower: this.isMobile ? -7 : -8, // Reduced jump power on mobile
       rotation: 0,
       velocityX: 0, // Added for horizontal movement
     };
@@ -44,7 +54,7 @@ class FlappyBird {
     this.pipeWidth = 60;
     this.pipeGap = 150;
     this.pipeSpacing = 200;
-    this.pipeSpeed = 2;
+    this.pipeSpeed = this.isMobile ? 2 * this.mobileSpeedMultiplier : 2; // Reduced speed on mobile
 
     // Background
     this.clouds = [];
@@ -61,7 +71,43 @@ class FlappyBird {
 
     this.setupEventListeners();
     this.updateHighScore();
+    this.updateMobileInstructions();
+    this.adjustCanvasForMobile();
     this.gameLoop();
+  }
+
+  // Mobile detection method
+  detectMobile() {
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) ||
+      (window.innerWidth <= 768 && window.innerHeight <= 1024)
+    );
+  }
+
+  // Update mobile instructions visibility
+  updateMobileInstructions() {
+    const mobileInstructions = document.querySelector(".mobile-instructions");
+    if (mobileInstructions) {
+      if (this.isMobile) {
+        mobileInstructions.style.display = "block";
+      } else {
+        mobileInstructions.style.display = "none";
+      }
+    }
+  }
+
+  // Adjust canvas size for mobile
+  adjustCanvasForMobile() {
+    if (this.isMobile) {
+      // Reduce canvas size on mobile for better performance
+      const maxWidth = Math.min(window.innerWidth - 40, 350);
+      const maxHeight = Math.min(window.innerHeight * 0.6, 500);
+
+      this.canvas.style.width = maxWidth + "px";
+      this.canvas.style.height = maxHeight + "px";
+    }
   }
 
   setupEventListeners() {
@@ -164,7 +210,7 @@ class FlappyBird {
   jump() {
     if (this.isVerticalMode) {
       // In modalità spaziale, il salto muove la navicella a destra
-      this.bird.velocityX = 8; // Velocità orizzontale positiva
+      this.bird.velocityX = this.isMobile ? 6 : 8; // Reduced horizontal speed on mobile
     } else {
       // Modalità normale
       this.bird.velocity = this.bird.jumpPower;
@@ -177,7 +223,7 @@ class FlappyBird {
 
     if (this.isVerticalMode) {
       // Modalità spaziale: movimento orizzontale come nella modalità normale ma ruotato
-      this.bird.velocityX -= 0.5; // Gravità orizzontale (attira a sinistra)
+      this.bird.velocityX -= this.isMobile ? 0.4 : 0.5; // Reduced horizontal gravity on mobile
       this.bird.x += this.bird.velocityX;
       this.bird.rotation = this.bird.velocityX > 0 ? -20 : 20; // Rotazione basata sulla velocità
 

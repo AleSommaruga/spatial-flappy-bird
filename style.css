@@ -150,6 +150,16 @@ body {
     font-weight: 300;
 }
 
+.mobile-instructions {
+    color: #4A90E2 !important;
+    font-weight: 500 !important;
+    opacity: 1 !important;
+    background: rgba(74, 144, 226, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
 .mode-selection {
     margin-top: 25px;
     text-align: center;
@@ -268,21 +278,71 @@ body {
     .game-container {
         padding: 15px;
         margin: 10px;
+        max-width: 95vw;
     }
     
     .game-header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-family: 'Fredoka One', cursive;
+        margin-bottom: 8px;
     }
     
     #gameCanvas {
         width: 100%;
         max-width: 350px;
         height: auto;
+        border-width: 2px;
     }
     
-    .score-container, .high-score-container {
+    .score-container, .high-score-container, .mode-container {
         display: block;
-        margin: 5px 0;
+        margin: 3px 0;
+        font-size: 1rem;
+    }
+    
+    .game-over, .start-screen {
+        padding: 20px;
+        max-width: 90vw;
+    }
+    
+    .game-over h2, .start-screen h2 {
+        font-size: 1.5rem;
+    }
+    
+    .game-over p, .start-screen p {
+        font-size: 1rem;
+    }
+    
+    .instructions {
+        font-size: 0.8rem !important;
+    }
+    
+    #restartBtn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+    
+    .controls {
+        font-size: 0.9rem;
+        margin-top: 15px;
+    }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .game-container {
+        padding: 15px;
+    }
+    
+    .game-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    #gameCanvas {
+        max-width: 400px;
     }
 } 
