@@ -5,15 +5,19 @@ Una fedele riproduzione del famoso gioco Flappy Bird in HTML5, CSS3 e JavaScript
 ## 🎮 Come Giocare
 
 1. **Apri il file `index.html`** nel tuo browser web
-2. **Premi SPAZIO o clicca** per iniziare il gioco
-3. **Usa SPAZIO o CLICK** per far volare l'uccellino
-4. **Evita i tubi verdi** e cerca di ottenere il punteggio più alto!
+2. **Scegli la modalità** di gioco (Normale o Spaziale)
+3. **Premi SPAZIO o clicca** per iniziare il gioco
+4. **Usa SPAZIO o CLICK** per far volare l'uccellino
+5. **Evita gli ostacoli** e cerca di ottenere il punteggio più alto!
 
 ## 🎯 Caratteristiche
 
 - **Grafica moderna** con effetti glassmorphism
 - **Fisica realistica** dell'uccellino con gravità e rotazione
 - **Sistema di punteggio** con record salvato nel browser
+- **Modalità Spaziale** con selezione pre-partita
+- **Scenari diversi** per modalità normale e spaziale
+- **Pausa di adattamento** durante le transizioni
 - **Controlli responsive** per desktop e mobile
 - **Animazioni fluide** con requestAnimationFrame
 - **Design responsive** che si adatta a tutti i dispositivi
@@ -43,14 +47,17 @@ flappy-bird/
 
 ## 🎮 Controlli
 
-- **SPAZIO** o **CLICK**: Far volare l'uccellino
+- **SPAZIO** o **CLICK**: Far volare l'uccellino/Muovere la navicella
 - **Rigioca**: Dopo il game over, clicca il pulsante per ricominciare
+- **Cambia Modalità**: Cambia modalità tra partite
 
 ## 🏆 Sistema di Punteggio
 
-- **+1 punto** per ogni tubo superato
+- **+1 punto** per ogni ostacolo superato
 - **Record salvato** automaticamente nel browser
 - **Visualizzazione** del punteggio corrente e del record
+- **Cambio automatico** di modalità ogni 5-9 punti
+- **Modalità Spaziale** con asteroidi e navicella dall'alto
 
 ## 🎨 Personalizzazioni Possibili
 
@@ -58,6 +65,7 @@ Il codice è ben strutturato e facilmente personalizzabile:
 
 - **Colori**: Modifica le variabili CSS per cambiare il tema
 - **Difficoltà**: Regola i parametri in `game.js` (velocità, gravità, ecc.)
+- **Modalità Spaziale**: Personalizza scenari e ostacoli
 - **Grafica**: Aggiungi sprite personalizzati o effetti particellari
 - **Suoni**: Integra effetti sonori con Web Audio API
 

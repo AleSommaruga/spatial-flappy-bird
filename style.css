@@ -23,11 +23,24 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+}
+
+.game-container.space-mode {
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 144, 226, 0.2);
+    transition: all 0.5s ease;
 }
 
 .game-header {
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
 }
 
 .game-header h1 {
@@ -36,14 +49,38 @@ body {
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     color: #FFD700;
+    transition: color 0.5s ease;
 }
 
-.score-container, .high-score-container {
+.game-container.space-mode .game-header h1 {
+    color: #4A90E2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-container.space-mode .game-header h1,
+.game-container.space-mode .score-container,
+.game-container.space-mode .high-score-container,
+.game-container.space-mode .mode-container {
+    color: #fff !important;
+    text-shadow: 0 2px 8px #4A90E2, 0 0 2px #000;
+}
+
+.score-container, .high-score-container, .mode-container {
     display: inline-block;
     margin: 0 15px;
     font-size: 1.2rem;
     font-weight: 600;
     font-family: 'Quicksand', sans-serif;
+    position: relative;
+    z-index: 10;
+}
+
+.mode-container {
+    color: #FFD700;
+}
+
+.game-container.space-mode .mode-container {
+    color: #4A90E2;
 }
 
 .game-area {
@@ -57,6 +94,27 @@ body {
     border-radius: 10px;
     background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 100%);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#gameCanvas.space-mode {
+    border: 3px solid #4A90E2;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #0B1426 0%, #1E3A8A 50%, #3B82F6 100%);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: spaceModeGlow 2s ease-in-out infinite;
+}
+
+@keyframes spaceModeGlow {
+    0%, 100% { box-shadow: 0 4px 15px rgba(74, 144, 226, 0.5); }
+    50% { box-shadow: 0 4px 25px rgba(74, 144, 226, 0.8); }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
 }
 
 .game-over, .start-screen {
@@ -92,7 +150,77 @@ body {
     font-weight: 300;
 }
 
-#restartBtn {
+.mode-selection {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.mode-selection h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+.game-container.space-mode .mode-selection h3 {
+    color: #4A90E2;
+}
+
+.mode-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.mode-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.mode-option:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #FFD700;
+}
+
+.game-container.space-mode .mode-option:hover {
+    border-color: #4A90E2;
+}
+
+.mode-option input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.mode-option input[type="radio"]:checked + .mode-label {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.game-container.space-mode .mode-option input[type="radio"]:checked + .mode-label {
+    color: #4A90E2;
+}
+
+.mode-label {
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.game-over-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+#restartBtn, #changeModeBtn {
     background: linear-gradient(45deg, #ff6b6b, #ee5a24);
     color: white;
     border: none;
@@ -101,9 +229,21 @@ body {
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 15px;
     font-weight: 600;
     font-family: 'Quicksand', sans-serif;
+}
+
+#changeModeBtn {
+    background: linear-gradient(45deg, #4A90E2, #357ABD);
+}
+
+#restartBtn:hover, #changeModeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+#changeModeBtn:hover {
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
 }
 
 #restartBtn:hover {

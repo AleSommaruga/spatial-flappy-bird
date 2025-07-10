@@ -20,6 +20,10 @@
         <span>Record: </span>
         <span id="highScore">0</span>
       </div>
+      <div class="mode-container">
+        <span>Modalità: </span>
+        <span id="verticalMode">Normale</span>
+      </div>
     </div>
 
     <div class="game-area">
@@ -28,13 +32,16 @@
       <div id="gameOverScreen" class="game-over hidden">
         <h2>Game Over!</h2>
         <p>Punteggio: <span id="finalScore">0</span></p>
-        <button id="restartBtn">Rigioca</button>
+        <div class="game-over-buttons">
+          <button id="restartBtn">Rigioca</button>
+        </div>
       </div>
 
       <div id="startScreen" class="start-screen">
         <h2>Flappy Bird</h2>
         <p>Premi SPAZIO o clicca per iniziare</p>
         <p class="instructions">Usa SPAZIO o CLICK per far volare l'uccellino</p>
+        <p class="instructions">La modalità cambierà automaticamente durante il gioco!</p>
       </div>
     </div>
 
