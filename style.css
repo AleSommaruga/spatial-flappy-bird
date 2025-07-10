@@ -98,16 +98,29 @@ body {
     .game-area::after {
         content: '';
         position: absolute;
-        bottom: 20px;
+        bottom: 30px;
         left: 50%;
         transform: translateX(-50%);
-        width: 80px;
-        height: 80px;
-        background: rgba(255, 215, 0, 0.2);
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 215, 0, 0.15);
         border-radius: 50%;
-        border: 2px dashed rgba(255, 215, 0, 0.5);
+        border: 3px dashed rgba(255, 215, 0, 0.6);
         pointer-events: none;
-        animation: pulse 2s infinite;
+        animation: pulse 1.5s infinite;
+    }
+    
+    /* Make the entire bottom area clickable */
+    .game-area::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background: transparent;
+        pointer-events: auto;
+        z-index: 1;
     }
 }
 
@@ -158,6 +171,18 @@ body {
     min-width: 200px;
 }
 
+/* Mobile-specific start screen positioning */
+@media (max-width: 768px) {
+    .start-screen {
+        top: 35% !important;
+        transform: translate(-50%, -50%) !important;
+        padding: 15px 25px !important;
+        min-width: 250px !important;
+        max-width: 350px !important;
+        height: auto !important;
+    }
+}
+
 .game-over h2, .start-screen h2 {
     font-family: 'Fredoka One', cursive;
     font-size: 2rem;
@@ -194,6 +219,24 @@ body {
     color: #FFD700 !important;
     margin: 15px 0 !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .tap-instruction {
+        font-size: 1.1rem !important;
+        margin: 6px 0 !important;
+    }
+    
+    .start-screen h2 {
+        font-size: 1.2rem !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .mobile-instructions {
+        font-size: 0.75rem !important;
+        padding: 4px 8px !important;
+        margin-top: 4px !important;
+    }
 }
 
 .mode-selection {
@@ -337,22 +380,22 @@ body {
     }
     
     .game-over, .start-screen {
-        padding: 20px;
+        padding: 12px 20px;
         max-width: 90vw;
         min-width: 250px;
     }
     
     .game-over h2, .start-screen h2 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .game-over p, .start-screen p {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
     
     .tap-instruction {
-        font-size: 1.3rem !important;
-        margin: 10px 0 !important;
+        font-size: 1rem !important;
+        margin: 6px 0 !important;
     }
     
     .instructions {
